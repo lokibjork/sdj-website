@@ -1,5 +1,5 @@
 // Netlify Function para criar preferência de pagamento no Mercado Pago
-const mercadopago = require('mercadopago');
+const { MercadoPagoConfig, Preference } = require('mercadopago');
 
 exports.handler = async (event, context) => {
     // Configurar CORS
@@ -28,16 +28,18 @@ exports.handler = async (event, context) => {
     }
 
     try {
-        // Configurar Mercado Pago com Access Token
-        mercadopago.configure({
-            access_token: process.env.MP_ACCESS_TOKEN
+        // Configurar Mercado Pago com Access Token (SDK v2)
+        const client = new MercadoPagoConfig({
+            accessToken: process.env.MP_ACCESS_TOKEN
         });
+
+        const preference = new Preference(client);
 
         // Obter dados do pedido
         const item = JSON.parse(event.body);
 
         // Criar preferência de pagamento
-        const preference = {
+        const preferenceData = {
             items: [
                 {
                     title: item.title,
@@ -54,22 +56,20 @@ exports.handler = async (event, context) => {
             auto_return: 'approved',
             statement_descriptor: 'SDJ GAMES',
             external_reference: `SDJ-${Date.now()}`,
-            notification_url: `${process.env.URL}/.netlify/functions/webhook`,
             payment_methods: {
-                excluded_payment_types: [],
                 installments: 12
             }
         };
 
         // Criar preferência
-        const response = await mercadopago.preferences.create(preference);
+        const response = await preference.create({ body: preferenceData });
 
         return {
             statusCode: 200,
             headers,
             body: JSON.stringify({
-                id: response.body.id,
-                init_point: response.body.init_point
+                id: response.id,
+                init_point: response.init_point
             })
         };
 
@@ -81,7 +81,8 @@ exports.handler = async (event, context) => {
             headers,
             body: JSON.stringify({
                 error: 'Erro ao processar pagamento',
-                message: error.message
+                message: error.message,
+                details: error.cause || error.response?.data || 'Sem detalhes adicionais'
             })
         };
     }
