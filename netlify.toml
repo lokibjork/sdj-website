@@ -1,0 +1,40 @@
+# Configuração do Netlify para SDJ Website
+
+[build]
+  publish = "."
+  command = "echo 'No build required for static site'"
+
+# Redirecionamentos e regras
+[[redirects]]
+  from = "/orcamento"
+  to = "/contato.html"
+  status = 301
+
+[[redirects]]
+  from = "/pagamento"
+  to = "/checkout.html"
+  status = 200
+
+# Configuração de formulários
+[build.environment]
+  NODE_VERSION = "18"
+
+# Headers de segurança
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache para assets estáticos
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

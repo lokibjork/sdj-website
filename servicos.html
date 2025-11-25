@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Serviços da SDJ: Pacotes de jogos prontos e desenvolvimento sob encomenda. Preços acessíveis e entrega rápida.">
+    <meta name="keywords" content="preço jogo 2d, orçamento jogo, serviços game dev, porting jogos">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+    <title>Serviços e Preços - SDJ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=5">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="ph-fill ph-game-controller"></i>
+                SDJ <span>Games</span>
+            </div>
+            <div class="menu-toggle"><i class="ph ph-list"></i></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="servicos.html" class="active">Serviços</a></li>
+                <li><a href="portfolio.html">Portfólio</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Alternar Tema">
+                <i class="ph-fill ph-sun"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="section-title slide-up">Nossas Soluções</h2>
+
+        <div class="services-grid" style="margin-bottom: 4rem;">
+            <!-- Card 1: Pacotes Prontos -->
+            <div class="service-card package-card"
+                style="text-align: center; border-top: 5px solid var(--accent-orange);">
+                <i class="ph-duotone ph-package"
+                    style="font-size: 3rem; color: var(--primary-blue); margin-bottom: 1rem;"></i>
+                <h3>Pacotes Prontos</h3>
+                <p>Jogos 2D personalizáveis com tema, cores e logo da sua empresa.</p>
+                <div class="price">R$ 250 <span>/ a partir de</span></div>
+                <div class="deadline"><i class="ph-bold ph-clock"></i> 7 a 14 dias</div>
+                <ul style="text-align: left; margin-top: 1.5rem; display: inline-block;">
+                    <li style="margin-bottom: 0.5rem;"><i class="ph-fill ph-check-circle"
+                            style="color: var(--accent-orange);"></i> Personalização visual</li>
+                    <li style="margin-bottom: 0.5rem;"><i class="ph-fill ph-check-circle"
+                            style="color: var(--accent-orange);"></i> Ideal para eventos e escolas</li>
+                    <li style="margin-bottom: 0.5rem;"><i class="ph-fill ph-check-circle"
+                            style="color: var(--accent-orange);"></i> Entrega rápida</li>
+                </ul>
+            </div>
+
+            <!-- Card 2: Jogos sob Encomenda -->
+            <div class="service-card custom-card"
+                style="text-align: center; border-top: 5px solid var(--primary-blue);">
+                <i class="ph-duotone ph-pencil-ruler"
+                    style="font-size: 3rem; color: var(--primary-blue); margin-bottom: 1rem;"></i>
+                <h3>Jogos sob Encomenda</h3>
+                <p>Projetos exclusivos criados do zero para atender necessidades específicas.</p>
+                <div class="price">R$ 800 <span>/ a partir de</span></div>
+                <div class="deadline"><i class="ph-bold ph-calendar"></i> 30 a 90 dias</div>
+                <ul style="text-align: left; margin-top: 1.5rem; display: inline-block;">
+                    <li style="margin-bottom: 0.5rem;"><i class="ph-fill ph-check-circle"
+                            style="color: var(--primary-blue);"></i> Mecânicas exclusivas</li>
+                    <li style="margin-bottom: 0.5rem;"><i class="ph-fill ph-check-circle"
+                            style="color: var(--primary-blue);"></i> Arte original</li>
+                    <li style="margin-bottom: 0.5rem;"><i class="ph-fill ph-check-circle"
+                            style="color: var(--primary-blue);"></i> Consultoria completa</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="section-title">Monte seu Pacote</h2>
+        <p style="text-align: center; margin-bottom: 3rem; color: var(--text-light);">Selecione as opções abaixo
+            para ter uma estimativa de investimento.</p>
+
+        <div class="configurator-container">
+            <div class="config-options">
+                <div class="config-header" style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
+                    <button id="btn-clear" class="btn-text"
+                        style="color: var(--text-light); text-decoration: underline; cursor: pointer; background: none; border: none; font-size: 0.9rem;">
+                        <i class="ph-bold ph-trash"></i> Limpar Opções
+                    </button>
+                </div>
+
+                <!-- Step 1: Game Type -->
+                <div class="pkg-step-card">
+                    <h3><span class="step-number">1</span> Tipo de Jogo</h3>
+                    <div class="pkg-options-grid">
+                        <div class="pkg-option-card selected" data-type="game-type" data-value="quiz" data-price="250">
+                            <div class="checkbox-indicator"><i class="ph-bold ph-check"></i></div>
+                            <i class="ph-duotone ph-question icon-main"></i>
+                            <span>Quiz / Trivia</span>
+                        </div>
+                        <div class="pkg-option-card" data-type="game-type" data-value="runner" data-price="400">
+                            <div class="checkbox-indicator"><i class="ph-bold ph-check"></i></div>
+                            <i class="ph-duotone ph-person-simple-run icon-main"></i>
+                            <span>Endless Runner</span>
+                        </div>
+                        <div class="pkg-option-card" data-type="game-type" data-value="platform" data-price="600">
+                            <div class="checkbox-indicator"><i class="ph-bold ph-check"></i></div>
+                            <i class="ph-duotone ph-game-controller icon-main"></i>
+                            <span>Plataforma 2D</span>
+                        </div>
+                        <div class="pkg-option-card" data-type="game-type" data-value="puzzle" data-price="500">
+                            <div class="checkbox-indicator"><i class="ph-bold ph-check"></i></div>
+                            <i class="ph-duotone ph-puzzle-piece icon-main"></i>
+                            <span>Puzzle / Lógica</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Platform -->
+                <div class="pkg-step-card">
+                    <h3><span class="step-number">2</span> Plataforma</h3>
+                    <div class="pkg-options-grid">
+                        <div class="pkg-option-card selected" data-type="platform" data-value="web" data-price="0">
+                            <div class="checkbox-indicator"><i class="ph-bold ph-check"></i></div>
+                            <i class="ph-duotone ph-globe icon-main"></i>
+                            <span>Web (Navegador)</span>
+                        </div>
+                        <div class="pkg-option-card" data-type="platform" data-value="android" data-price="150">
+                            <div class="checkbox-indicator"><i class="ph-bold ph-check"></i></div>
+                            <i class="ph-duotone ph-android-logo icon-main"></i>
+                            <span>Android (.APK)</span>
+                        </div>
+                        <div class="pkg-option-card" data-type="platform" data-value="pc" data-price="100">
+                            <div class="checkbox-indicator"><i class="ph-bold ph-check"></i></div>
+                            <i class="ph-duotone ph-desktop icon-main"></i>
+                            <span>PC (Windows)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Extras -->
+                <div class="pkg-step-card">
+                    <h3><span class="step-number">3</span> Extras (Opcional)</h3>
+                    <div class="pkg-options-grid">
+                        <div class="pkg-option-card multi-select" data-type="extra" data-value="leaderboard"
+                            data-price="200">
+                            <div class="checkbox-indicator"><i class="ph-bold ph-check"></i></div>
+                            <i class="ph-duotone ph-trophy icon-main"></i>
+                            <span>Ranking Online</span>
+                        </div>
+                        <div class="pkg-option-card multi-select" data-type="extra" data-value="ads" data-price="150">
+                            <div class="checkbox-indicator"><i class="ph-bold ph-check"></i></div>
+                            <i class="ph-duotone ph-megaphone icon-main"></i>
+                            <span>Integração de Anúncios</span>
+                        </div>
+                        <div class="pkg-option-card multi-select" data-type="extra" data-value="analytics"
+                            data-price="100">
+                            <div class="checkbox-indicator"><i class="ph-bold ph-check"></i></div>
+                            <i class="ph-duotone ph-chart-line-up icon-main"></i>
+                            <span>Analytics Avançado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Panel -->
+            <div class="config-summary">
+                <div class="summary-card">
+                    <h3>Resumo do Investimento</h3>
+                    <div class="summary-items">
+                        <div class="summary-row">
+                            <span>Base (Quiz):</span>
+                            <span id="base-price">R$ 250</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Plataforma:</span>
+                            <span id="platform-price">Incluso</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Extras:</span>
+                            <span id="extras-price">R$ 0</span>
+                        </div>
+                        <h2 class="section-title" style="font-size: 2rem;">Como Funciona?</h2>
+                        <div class="services-grid"
+                            style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div style="padding: 1rem;">
+                                <i class="ph-duotone ph-lightbulb"
+                                    style="font-size: 2.5rem; color: var(--accent-orange);"></i>
+                                <h4>1. Ideia</h4>
+                                <p style="font-size: 0.9rem;">Você escolhe um pacote ou envia sua ideia.</p>
+                            </div>
+                            <div style="padding: 1rem;">
+                                <i class="ph-duotone ph-file-text"
+                                    style="font-size: 2.5rem; color: var(--accent-orange);"></i>
+                                <h4>2. Orçamento</h4>
+                                <p style="font-size: 0.9rem;">Enviamos o valor e prazo.</p>
+                            </div>
+                            <div style="padding: 1rem;">
+                                <i class="ph-duotone ph-gear"
+                                    style="font-size: 2.5rem; color: var(--accent-orange);"></i>
+                                <h4>3. Produção</h4>
+                                <p style="font-size: 0.9rem;">Desenvolvemos o jogo.</p>
+                            </div>
+                            <div style="padding: 1rem;">
+                                <i class="ph-duotone ph-check-fat"
+                                    style="font-size: 2.5rem; color: var(--accent-orange);"></i>
+                                <h4>4. Entrega</h4>
+                                <p style="font-size: 0.9rem;">Você recebe o jogo pronto + ajustes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FAQ Section -->
+                    <section class="faq-section slide-up delay-3">
+                        <h2 class="section-title">Perguntas Frequentes</h2>
+                        <div class="faq-container">
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>O código-fonte do jogo será meu?</h3>
+                                    <i class="ph-bold ph-caret-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Sim! Para projetos sob encomenda, o código-fonte é 100% seu após a entrega final.
+                                        Nos pacotes
+                                        prontos, você recebe a licença de uso vitalícia, mas o código base permanece
+                                        propriedade da
+                                        SDJ.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>Vocês publicam na Google Play e App Store?</h3>
+                                    <i class="ph-bold ph-caret-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Podemos auxiliar em todo o processo de publicação! Para Android (Google Play), o
+                                        serviço já
+                                        está incluso em alguns pacotes ou como extra. Para iOS (App Store), é necessário
+                                        uma conta
+                                        de desenvolvedor da Apple (custo anual pago à Apple), e nós fazemos o upload e
+                                        configuração
+                                        para você.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>Quais engines vocês utilizam?</h3>
+                                    <i class="ph-bold ph-caret-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Trabalhamos principalmente com engines leves e versáteis como Godot e Construct 3
+                                        para
+                                        garantir que seu jogo rode liso em qualquer celular ou navegador. Para projetos
+                                        3D ou mais
+                                        complexos, utilizamos Unity.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>Como funciona o pagamento?</h3>
+                                    <i class="ph-bold ph-caret-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Para iniciar o projeto, solicitamos 50% de sinal. Os 50% restantes são pagos
+                                        apenas na
+                                        entrega do jogo aprovado. Aceitamos PIX, Boleto e Cartão de Crédito
+                                        (parcelamento
+                                        disponível).</p>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>Vocês fazem a arte e música ou preciso fornecer?</h3>
+                                    <i class="ph-bold ph-caret-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Nós cuidamos de tudo! Temos artistas e sound designers parceiros. Se você já
+                                        tiver a arte
+                                        (logo, mascote), nós integramos ao jogo. Caso contrário, criamos tudo do zero
+                                        seguindo sua
+                                        identidade visual.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 SDJ - Serviços de Desenvolvimento de Jogos.</p>
+        <div class="social-links">
+            <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+            <a href="#"><i class="ph-fill ph-linkedin-logo"></i></a>
+            <a href="#"><i class="ph-fill ph-whatsapp-logo"></i></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Conheça o portfólio da SDJ. Jogos 2D desenvolvidos para empresas, escolas e eventos.">
+    <meta name="keywords" content="portfólio jogos, jogos 2d, desenvolvimento de games, sdj games">
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description"
+            content="Conheça o portfólio da SDJ. Jogos 2D desenvolvidos para empresas, escolas e eventos.">
+        <meta name="keywords" content="portfólio jogos, jogos 2d, desenvolvimento de games, sdj games">
+        <link rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+        <title>Portfólio - SDJ</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet" href="styles.css?v=5">
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    </head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="ph-fill ph-game-controller"></i>
+                SDJ <span>Games</span>
+            </div>
+            <div class="menu-toggle"><i class="ph ph-list"></i></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="servicos.html">Serviços</a></li>
+                <li><a href="portfolio.html" class="active">Portfólio</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Alternar Tema">
+                <i class="ph-fill ph-sun"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="section-title slide-up">Nossos Projetos</h2>
+
+        <div class="filters slide-up delay-1">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="pacote">Pacotes</button>
+            <button class="filter-btn" data-filter="encomenda">Encomendas</button>
+        </div>
+
+        <div class="portfolio-grid slide-up delay-2">
+            <!-- Project 1 -->
+            <div class="project-card" data-category="pacote">
+                <div class="project-image" style="background-color: #FF7A33;">
+                    <i class="ph-duotone ph-game-controller" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
+                </div>
+                <div class="project-info">
+                    <span class="badge pacote">Pacote Pronto</span>
+                    <h3>Quiz Educativo</h3>
+                    <p>Jogo de perguntas e respostas personalizado para escola de idiomas.</p>
+                    <a href="#" class="btn-play"><i class="ph-fill ph-play-circle"></i> Jogar Agora</a>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card" data-category="encomenda">
+                <div class="project-image" style="background-color: #2F6DF0;">
+                    <i class="ph-duotone ph-sword" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
+                </div>
+                <div class="project-info">
+                    <span class="badge encomenda">Encomenda</span>
+                    <h3>Aventura Espacial</h3>
+                    <p>Jogo de plataforma exclusivo desenvolvido para campanha de marketing.</p>
+                    <a href="#" class="btn-play"><i class="ph-fill ph-play-circle"></i> Jogar Agora</a>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card" data-category="pacote">
+                <div class="project-image" style="background-color: #FF7A33;">
+                    <i class="ph-duotone ph-car" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
+                </div>
+                <div class="project-info">
+                    <span class="badge pacote">Pacote Pronto</span>
+                    <h3>Corrida Infinita</h3>
+                    <p>Endless runner simples para ativação de marca em evento.</p>
+                    <a href="#" class="btn-play"><i class="ph-fill ph-play-circle"></i> Jogar Agora</a>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card" data-category="encomenda">
+                <div class="project-image" style="background-color: #2F6DF0;">
+                    <i class="ph-duotone ph-plant" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
+                </div>
+                <div class="project-info">
+                    <span class="badge encomenda">Encomenda</span>
+                    <h3>Farm Simulator 2D</h3>
+                    <p>Simulador de fazenda com economia complexa para treinamento corporativo.</p>
+                    <a href="#" class="btn-play"><i class="ph-fill ph-play-circle"></i> Jogar Agora</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 SDJ - Serviços de Desenvolvimento de Jogos.</p>
+        <div class="social-links">
+            <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+            <a href="#"><i class="ph-fill ph-linkedin-logo"></i></a>
+            <a href="#"><i class="ph-fill ph-whatsapp-logo"></i></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

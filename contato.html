@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Entre em contato com a SDJ. Peça um orçamento para seu jogo 2D ou tire suas dúvidas.">
+    <meta name="keywords" content="contato sdj, orçamento jogo, fale conosco games">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+    <title>Contato - SDJ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=5">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="ph-fill ph-game-controller"></i>
+                SDJ <span>Games</span>
+            </div>
+            <div class="menu-toggle"><i class="ph ph-list"></i></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="servicos.html">Serviços</a></li>
+                <li><a href="portfolio.html">Portfólio</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="contato.html" class="active">Contato</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Alternar Tema">
+                <i class="ph-fill ph-sun"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="section-title slide-up">Vamos Conversar?</h2>
+        <div class="contact-container slide-up delay-1">
+            <p style="text-align: center; margin-bottom: 2rem;">Preencha o formulário abaixo para pedir um orçamento ou
+                tirar dúvidas.</p>
+
+            <form name="contact" method="POST" data-netlify="true" action="/sucesso.html" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="contact" />
+                <!-- Honeypot para evitar spam -->
+                <p style="display: none;">
+                    <label>Não preencha este campo: <input name="bot-field" /></label>
+                </p>
+
+                <div class="form-group">
+                    <label for="name">Nome</label>
+                    <input type="text" id="name" name="name" required placeholder="Seu nome ou da sua empresa">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Telefone/WhatsApp (opcional)</label>
+                    <input type="tel" id="phone" name="phone" placeholder="(00) 00000-0000">
+                </div>
+
+                <div class="form-group">
+                    <label for="project-type">Tipo de Projeto</label>
+                    <select id="project-type" name="project-type">
+                        <option value="pacote">Pacote Pronto (a partir de R$ 250)</option>
+                        <option value="encomenda">Jogo sob Encomenda (a partir de R$ 800)</option>
+                        <option value="duvida">Dúvida / Outros</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Mensagem</label>
+                    <textarea id="message" name="message" required
+                        placeholder="Conte um pouco sobre sua ideia..."></textarea>
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%;">Enviar Mensagem <i
+                        class="ph-bold ph-paper-plane-right"></i></button>
+            </form>
+
+            <!-- Informações de contato direto -->
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center;">
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary-blue);">Ou entre em contato diretamente:</h3>
+                <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="mailto:contato@sdjgames.com.br"
+                        style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-color); text-decoration: none;">
+                        <i class="ph-fill ph-envelope" style="font-size: 1.5rem; color: var(--accent-orange);"></i>
+                        <span>contato@sdjgames.com.br</span>
+                    </a>
+                    <a href="https://wa.me/5511999999999" target="_blank"
+                        style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-color); text-decoration: none;">
+                        <i class="ph-fill ph-whatsapp-logo" style="font-size: 1.5rem; color: #25D366;"></i>
+                        <span>(11) 99999-9999</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 SDJ - Serviços de Desenvolvimento de Jogos.</p>
+        <div class="social-links">
+            <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+            <a href="#"><i class="ph-fill ph-linkedin-logo"></i></a>
+            <a href="#"><i class="ph-fill ph-whatsapp-logo"></i></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

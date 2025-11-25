@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Checkout e Pagamento - SDJ Games">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+    <title>Checkout - SDJ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=5">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Mercado Pago SDK -->
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="ph-fill ph-game-controller"></i>
+                SDJ <span>Games</span>
+            </div>
+            <div class="menu-toggle"><i class="ph ph-list"></i></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="servicos.html">Serviços</a></li>
+                <li><a href="portfolio.html">Portfólio</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Alternar Tema">
+                <i class="ph-fill ph-sun"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="section-title">Finalizar Pedido</h2>
+
+        <div style="max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <!-- Resumo do Pedido -->
+            <div
+                style="background: var(--white); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow-sm);">
+                <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem;">Resumo do Pedido</h3>
+
+                <div id="order-summary">
+                    <div style="padding: 1rem; background: var(--bg-color); border-radius: 8px; margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <strong>Pacote Selecionado:</strong>
+                            <span id="package-name">Quiz / Trivia</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <strong>Plataforma:</strong>
+                            <span id="platform-name">Web</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <strong>Extras:</strong>
+                            <span id="extras-list">Nenhum</span>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 2px solid var(--primary-blue); padding-top: 1rem; margin-top: 1rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; font-size: 1.5rem; font-weight: 800; color: var(--primary-blue);">
+                            <span>Total:</span>
+                            <span id="total-amount">R$ 250</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1rem; background: #E6F0FF; border-radius: 8px;">
+                    <p style="margin: 0; font-size: 0.9rem; color: var(--text-color);">
+                        <i class="ph-fill ph-info" style="color: var(--primary-blue);"></i>
+                        <strong>Pagamento em 2 etapas:</strong><br>
+                        • 50% agora para iniciar o projeto<br>
+                        • 50% na entrega final
+                    </p>
+                </div>
+            </div>
+
+            <!-- Opções de Pagamento -->
+            <div
+                style="background: var(--white); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow-sm);">
+                <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem;">Escolha a Forma de Pagamento</h3>
+
+                <!-- Mercado Pago -->
+                <div class="payment-option"
+                    style="border: 2px solid #eee; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer; transition: all 0.3s;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <i class="ph-fill ph-credit-card" style="font-size: 2rem; color: #009EE3;"></i>
+                        <div>
+                            <strong style="display: block;">Mercado Pago</strong>
+                            <small style="color: var(--text-light);">Cartão, PIX, Boleto</small>
+                        </div>
+                    </div>
+                    <button class="btn" style="width: 100%;" onclick="initMercadoPago()">
+                        Pagar com Mercado Pago
+                    </button>
+                </div>
+
+                <!-- PIX Direto -->
+                <div class="payment-option"
+                    style="border: 2px solid #eee; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <i class="ph-fill ph-qr-code" style="font-size: 2rem; color: #32BCAD;"></i>
+                        <div>
+                            <strong style="display: block;">PIX</strong>
+                            <small style="color: var(--text-light);">Pagamento instantâneo</small>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary"
+                        style="width: 100%; border: 2px solid var(--primary-blue); color: var(--primary-blue);"
+                        onclick="showPixInfo()">
+                        Gerar QR Code PIX
+                    </button>
+                </div>
+
+                <!-- Transferência Bancária -->
+                <div class="payment-option" style="border: 2px solid #eee; border-radius: 8px; padding: 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <i class="ph-fill ph-bank" style="font-size: 2rem; color: var(--accent-orange);"></i>
+                        <div>
+                            <strong style="display: block;">Transferência Bancária</strong>
+                            <small style="color: var(--text-light);">TED ou DOC</small>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary"
+                        style="width: 100%; border: 2px solid var(--primary-blue); color: var(--primary-blue);"
+                        onclick="showBankInfo()">
+                        Ver Dados Bancários
+                    </button>
+                </div>
+
+                <p style="margin-top: 2rem; font-size: 0.85rem; color: var(--text-light); text-align: center;">
+                    <i class="ph-fill ph-lock"></i> Pagamento 100% seguro e criptografado
+                </p>
+            </div>
+        </div>
+
+        <!-- Modal para informações de pagamento -->
+        <div id="payment-modal"
+            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center;">
+            <div
+                style="background: var(--white); padding: 2rem; border-radius: var(--radius); max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3 style="color: var(--primary-blue); margin: 0;" id="modal-title">Informações de Pagamento</h3>
+                    <button onclick="closeModal()"
+                        style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">
+                        <i class="ph-bold ph-x"></i>
+                    </button>
+                </div>
+                <div id="modal-content"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 SDJ - Serviços de Desenvolvimento de Jogos.</p>
+        <div class="social-links">
+            <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+            <a href="#"><i class="ph-fill ph-linkedin-logo"></i></a>
+            <a href="#"><i class="ph-fill ph-whatsapp-logo"></i></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // ========================================
+        // CONFIGURAÇÃO DO MERCADO PAGO
+        // ========================================
+        const MP_PUBLIC_KEY = 'APP_USR-ed38559a-db8c-4f7e-b5bc-a2077f89103e';
+
+        // Inicializar Mercado Pago SDK
+        const mp = new MercadoPago(MP_PUBLIC_KEY, {
+            locale: 'pt-BR'
+        });
+
+        // Função para inicializar Mercado Pago
+        function initMercadoPago() {
+            // Por enquanto, redireciona para contato até criar a Netlify Function
+            alert('🔧 Integração do Mercado Pago Configurada!\n\nSua Public Key está ativa. Para processar pagamentos automaticamente, você precisa criar uma Netlify Function.\n\nPor enquanto, vamos redirecioná-lo para o formulário de contato para processar o pagamento manualmente.');
+            window.location.href = 'contato.html?subject=Pagamento&message=Gostaria de finalizar o pagamento do meu pedido';
+        }
+
+        // Função para mostrar informações do PIX
+        function showPixInfo() {
+            const modal = document.getElementById('payment-modal');
+            const modalContent = document.getElementById('modal-content');
+            const total = document.getElementById('total-amount').textContent;
+
+            modalContent.innerHTML = `
+                <div style="text-align: center;">
+                    <p style="margin-bottom: 1rem;">Valor a pagar: <strong style="font-size: 1.5rem; color: var(--primary-blue);">${total}</strong></p>
+                    <div style="background: #f5f5f5; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="margin-bottom: 0.5rem;"><strong>Chave PIX (E-mail):</strong></p>
+                        <p style="font-family: monospace; font-size: 1.1rem; color: var(--primary-blue);">pagamento@sdjgames.com.br</p>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Após realizar o pagamento, envie o comprovante para <strong>contato@sdjgames.com.br</strong></p>
+                    <button class="btn" style="margin-top: 1rem;" onclick="closeModal()">Entendi</button>
+                </div>
+            `;
+            modal.style.display = 'flex';
+        }
+
+        // Função para mostrar dados bancários
+        function showBankInfo() {
+            const modal = document.getElementById('payment-modal');
+            const modalContent = document.getElementById('modal-content');
+            const total = document.getElementById('total-amount').textContent;
+
+            modalContent.innerHTML = `
+                <div>
+                    <p style="margin-bottom: 1rem;">Valor a transferir: <strong style="font-size: 1.5rem; color: var(--primary-blue);">${total}</strong></p>
+                    <div style="background: #f5f5f5; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p><strong>Banco:</strong> Banco do Brasil</p>
+                        <p><strong>Agência:</strong> 0000-0</p>
+                        <p><strong>Conta Corrente:</strong> 00000-0</p>
+                        <p><strong>CNPJ:</strong> 00.000.000/0001-00</p>
+                        <p><strong>Favorecido:</strong> SDJ Desenvolvimento de Jogos</p>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Após realizar a transferência, envie o comprovante para <strong>contato@sdjgames.com.br</strong></p>
+                    <button class="btn" style="margin-top: 1rem; width: 100%;" onclick="closeModal()">Entendi</button>
+                </div>
+            `;
+            modal.style.display = 'flex';
+        }
+
+        // Função para fechar modal
+        function closeModal() {
+            document.getElementById('payment-modal').style.display = 'none';
+        }
+
+        // Carregar dados do pedido da URL ou localStorage
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const total = urlParams.get('total') || 'R$ 250';
+            const packageName = urlParams.get('package') || 'Quiz / Trivia';
+
+            if (total) document.getElementById('total-amount').textContent = total;
+            if (packageName) document.getElementById('package-name').textContent = packageName;
+        });
+    </script>
+</body>
+
+</html>
