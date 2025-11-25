@@ -15,6 +15,17 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <!-- Mercado Pago SDK -->
     <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <style>
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -169,24 +180,59 @@
 
     <script src="script.js"></script>
     <script>
-        // ========================================
-        // CONFIGURAÇÃO DO MERCADO PAGO
-        // ========================================
+        // Configuração do Mercado Pago
         const MP_PUBLIC_KEY = 'APP_USR-ed38559a-db8c-4f7e-b5bc-a2077f89103e';
-
-        // Inicializar Mercado Pago SDK
-        const mp = new MercadoPago(MP_PUBLIC_KEY, {
-            locale: 'pt-BR'
-        });
+        const mp = new MercadoPago(MP_PUBLIC_KEY, { locale: 'pt-BR' });
 
         // Função para inicializar Mercado Pago
-        function initMercadoPago() {
-            // Por enquanto, redireciona para contato até criar a Netlify Function
-            alert('🔧 Integração do Mercado Pago Configurada!\n\nSua Public Key está ativa. Para processar pagamentos automaticamente, você precisa criar uma Netlify Function.\n\nPor enquanto, vamos redirecioná-lo para o formulário de contato para processar o pagamento manualmente.');
-            window.location.href = 'contato.html?subject=Pagamento&message=Gostaria de finalizar o pagamento do meu pedido';
+        async function initMercadoPago() {
+            try {
+                const btn = event.target;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="ph ph-spinner" style="animation: spin 1s linear infinite;"></i> Processando...';
+                btn.disabled = true;
+
+                const totalText = document.getElementById('total-amount').textContent;
+                const total = parseFloat(totalText.replace('R$ ', '').replace(',', '.'));
+                const packageName = document.getElementById('package-name').textContent;
+                const platformName = document.getElementById('platform-name').textContent;
+                const extrasList = document.getElementById('extras-list').textContent;
+
+                const response = await fetch('/.netlify/functions/create-preference', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        title: `SDJ Games - ${packageName}`,
+                        description: `Plataforma: ${platformName} | Extras: ${extrasList}`,
+                        price: total,
+                        quantity: 1
+                    })
+                });
+
+                if (!response.ok) throw new Error('Erro ao criar preferência');
+
+                const data = await response.json();
+
+                if (data.id) {
+                    mp.checkout({ preference: { id: data.id }, autoOpen: true });
+                } else {
+                    throw new Error('Preferência inválida');
+                }
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }, 2000);
+
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('❌ Erro ao processar pagamento.\n\nPor favor, tente novamente ou entre em contato conosco.');
+                const btn = event.target;
+                btn.innerHTML = 'Pagar com Mercado Pago';
+                btn.disabled = false;
+            }
         }
 
-        // Função para mostrar informações do PIX
         function showPixInfo() {
             const modal = document.getElementById('payment-modal');
             const modalContent = document.getElementById('modal-content');
@@ -206,7 +252,6 @@
             modal.style.display = 'flex';
         }
 
-        // Função para mostrar dados bancários
         function showBankInfo() {
             const modal = document.getElementById('payment-modal');
             const modalContent = document.getElementById('modal-content');
@@ -229,12 +274,10 @@
             modal.style.display = 'flex';
         }
 
-        // Função para fechar modal
         function closeModal() {
             document.getElementById('payment-modal').style.display = 'none';
         }
 
-        // Carregar dados do pedido da URL ou localStorage
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const total = urlParams.get('total') || 'R$ 250';
