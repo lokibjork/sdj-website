@@ -304,6 +304,27 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Passar dados para a página de checkout
+        document.getElementById('btn-checkout').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // Obter dados do resumo
+            const total = document.getElementById('total-price').textContent;
+            const packageName = document.querySelector('.pkg-option-card.selected[data-type="game-type"] span').textContent;
+            const platform = document.querySelector('.pkg-option-card.selected[data-type="platform"] span').textContent;
+
+            // Obter extras selecionados
+            const extrasCards = document.querySelectorAll('.pkg-option-card.multi-select.selected[data-type="extra"]');
+            const extras = Array.from(extrasCards).map(card => card.querySelector('span').textContent).join(', ') || 'Nenhum';
+
+            // Criar URL com parâmetros
+            const url = `checkout.html?total=${encodeURIComponent(total)}&package=${encodeURIComponent(packageName)}&platform=${encodeURIComponent(platform)}&extras=${encodeURIComponent(extras)}`;
+
+            // Redirecionar
+            window.location.href = url;
+        });
+    </script>
 </body>
 
 </html>

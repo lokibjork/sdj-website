@@ -180,11 +180,9 @@
 
     <script src="script.js"></script>
     <script>
-        // Configuração do Mercado Pago
         const MP_PUBLIC_KEY = 'APP_USR-ed38559a-db8c-4f7e-b5bc-a2077f89103e';
         const mp = new MercadoPago(MP_PUBLIC_KEY, { locale: 'pt-BR' });
 
-        // Função para inicializar Mercado Pago
         async function initMercadoPago() {
             try {
                 const btn = event.target;
@@ -193,7 +191,7 @@
                 btn.disabled = true;
 
                 const totalText = document.getElementById('total-amount').textContent;
-                const total = parseFloat(totalText.replace('R$ ', '').replace(',', '.'));
+                const total = parseFloat(totalText.replace('R$ ', '').replace('.', '').replace(',', '.'));
                 const packageName = document.getElementById('package-name').textContent;
                 const platformName = document.getElementById('platform-name').textContent;
                 const extrasList = document.getElementById('extras-list').textContent;
@@ -209,7 +207,10 @@
                     })
                 });
 
-                if (!response.ok) throw new Error('Erro ao criar preferência');
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Erro ao criar preferência');
+                }
 
                 const data = await response.json();
 
@@ -226,7 +227,7 @@
 
             } catch (error) {
                 console.error('Erro:', error);
-                alert('❌ Erro ao processar pagamento.\n\nPor favor, tente novamente ou entre em contato conosco.');
+                alert('❌ Erro ao processar pagamento: ' + error.message + '\n\nPor favor, tente novamente ou entre em contato conosco.');
                 const btn = event.target;
                 btn.innerHTML = 'Pagar com Mercado Pago';
                 btn.disabled = false;
@@ -282,9 +283,13 @@
             const urlParams = new URLSearchParams(window.location.search);
             const total = urlParams.get('total') || 'R$ 250';
             const packageName = urlParams.get('package') || 'Quiz / Trivia';
+            const platform = urlParams.get('platform') || 'Web';
+            const extras = urlParams.get('extras') || 'Nenhum';
 
             if (total) document.getElementById('total-amount').textContent = total;
             if (packageName) document.getElementById('package-name').textContent = packageName;
+            if (platform) document.getElementById('platform-name').textContent = platform;
+            if (extras) document.getElementById('extras-list').textContent = extras;
         });
     </script>
 </body>
